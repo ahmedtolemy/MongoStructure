@@ -31,6 +31,7 @@ namespace MongoStructure.Controllers
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
+
             var xx = Builders<Application>.Filter.Eq("Name", "app2");
            // var sort =Builders<Application>.Sort();
           //  SortDefinition<Application> sprt = new BsonDocument("Name", 1);
