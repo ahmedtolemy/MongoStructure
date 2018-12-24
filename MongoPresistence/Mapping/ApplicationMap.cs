@@ -18,21 +18,12 @@ namespace MongoPresistence.Mapping
             {
                 map.AutoMap();
                 map.GetMemberMap(x => x.CreatedOn).SetSerializer(new DateTimeSerializer(DateTimeKind.Utc));
-
-               // map.SetIdMember(map.GetMemberMap(c => c.Id));
-                //map.GetMemberMap(x => x.ModifiedOn).SetDefaultValue(DateTime.Now);
-                //  map.GetMemberMap(x => x.CreatedOn).SetDefaultValue(DateTime.Now);
+                map.IdMemberMap.SetIdGenerator(StringObjectIdGenerator.Instance).SetSerializer(new StringSerializer(BsonType.ObjectId));
                 map.MapExtraElementsMember(x => x.ExtraElement);
             });
             BsonClassMap.RegisterClassMap<Application>(map =>
             {
-               
                 map.AutoMap();
-               
-                
-               // map.MapIdProperty(x => x.Id).SetIdGenerator();
-              // map.MapExtraElementsMember(x=>x.ExtraElement);
-
             });
            
             var pack = new ConventionPack();

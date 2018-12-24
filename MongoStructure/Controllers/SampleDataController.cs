@@ -31,23 +31,22 @@ namespace MongoStructure.Controllers
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            var app1 = new Application() { Name = "app" , CreatedOn = DateTime.Now ,ModulesIds=new List<string>(),ExtraElement=new BsonDocument()};
+            //  for (int i = 0; i < 1000000; i++)
+            //{
+            //  app1.ModulesIds.Add("he");
+            // }88
+            app1.ExtraElement.Add("age", 18);
+            app1.ExtraElement.Add("address", "street");
+            new ApplicationRepository(new MongoContext()).InsertOne(app1);
 
-            var xx = Builders<Application>.Filter.Eq("Name", "app2");
-           // var sort =Builders<Application>.Sort();
-          //  SortDefinition<Application> sprt = new BsonDocument("Name", 1);
-           // xx = xx & Builders<Application>.Filter.Eq("Name", "app2");
-            Stopwatch stopWatch = new Stopwatch();
-            stopWatch.Start();
-            
+            sw.Stop();
+            TimeSpan ts = sw.Elapsed;
+
+
             var app= new ApplicationRepository(new MongoContext()).All();
-           // var obj = ObjectId.Parse("5c1bcacb07a410084076e028");
-      var c=      new ApplicationRepository(new MongoContext()).GetOne(s => s.Id ==ObjectId.Parse("5c1c05b0298d309cb4d09416"));
-           var value= c.Id.ToString();
-            stopWatch.Stop();
-            // Get the elapsed time as a TimeSpan value.
-            TimeSpan ts = stopWatch.Elapsed;
-            new ApplicationRepository(new MongoContext()).InsertOne(new Application() { Name = "app1", CreatedOn = DateTime.Now });
-            var xs=app.FirstOrDefault().Id.ToString();
             
             var rng = new Random();
             return app.Select(index => new WeatherForecast

@@ -8,8 +8,7 @@ namespace MongoDomain
 {
     public class Base : IEntity
     {
-        public ObjectId Id { get ; set; }
-      //  public byte[] RowVersion { get; set ; }
+        public string Id { get ; set; }
         public DateTime CreatedOn { get ; set; }
         public DateTime ModifiedOn { get ; set ; }
         [BsonExtraElements]

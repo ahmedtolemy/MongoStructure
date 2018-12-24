@@ -7,8 +7,7 @@ namespace MongoDomain
 {
     public interface IEntity
     {
-        ObjectId Id { get; set; }
-       // byte[] RowVersion { get; set; }
+        string Id { get; set; }
         DateTime CreatedOn { get; set; }
         DateTime ModifiedOn { get; set; }
     }
